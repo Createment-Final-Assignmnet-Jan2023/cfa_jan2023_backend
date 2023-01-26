@@ -2,7 +2,6 @@ package com.manager.cfa_jan2023.service.utils;
 
 import com.manager.cfa_jan2023.repository.model.Pokemon;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;

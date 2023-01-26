@@ -30,4 +30,9 @@ public class Pokemon {
     private Integer baseSpecialAttack;
     private Integer baseSpecialDefense;
     private Integer baseSpeed;
+
+    public Pokemon(String name, List<String> types) {
+        this.name = name;
+        this.types = types;
+    }
 }

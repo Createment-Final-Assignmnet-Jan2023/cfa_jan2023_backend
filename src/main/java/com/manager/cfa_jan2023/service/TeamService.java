@@ -1,11 +1,10 @@
 package com.manager.cfa_jan2023.service;
 
 import com.manager.cfa_jan2023.controller.error.NotFoundException;
-import com.manager.cfa_jan2023.repository.PokemonRepository;
-import com.manager.cfa_jan2023.repository.model.Pokemon;
+import com.manager.cfa_jan2023.repository.TeamRepository;
 import com.manager.cfa_jan2023.repository.model.Team;
-import com.manager.cfa_jan2023.service.dto.PokemonDTO;
-import com.manager.cfa_jan2023.service.mapper.PokemonMapper;
+import com.manager.cfa_jan2023.service.dto.TeamDTO;
+import com.manager.cfa_jan2023.service.mapper.TeamMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +13,19 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
-public class PokemonService {
+public class TeamService {
     //business logic happens here
-    private final PokemonRepository pokemonRepository;
+    private final TeamRepository teamRepository;
     Random random = new Random();
 
-    public PokemonDTO getById(long id) {
-        Pokemon pokemon = pokemonRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
-        return PokemonMapper.toDto(pokemon);
+    public TeamDTO getById(long id) {
+        Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
+        return TeamMapper.toDto(team);
     }
 
-    public List<PokemonDTO> getAllPokemons() {
-        return pokemonRepository.findAll().stream()
-                .map(PokemonMapper::toDto)
+    public List<TeamDTO> getAllTeams() {
+        return teamRepository.findAll().stream()
+                .map(TeamMapper::toDto)
                 .toList();
     }
 

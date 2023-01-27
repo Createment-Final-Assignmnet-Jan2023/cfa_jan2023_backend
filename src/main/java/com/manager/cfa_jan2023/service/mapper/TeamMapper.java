@@ -9,12 +9,14 @@ public class TeamMapper {
     public static TeamDTO toDto(Team entity) {
         return TeamDTO.builder()
                 .id(entity.getId())
+                .teamMembers(entity.getTeamMembers())
                 .build();
     }
 
     public static Team toEntity(TeamDTO teamDTO) {
         return Team.builder()
                 .id(teamDTO.getId())
+                .teamMembers(teamDTO.getTeamMembers())
                 .build();
     }
 }

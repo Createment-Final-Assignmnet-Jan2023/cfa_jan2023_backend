@@ -17,6 +17,6 @@ import java.util.List;
 public class TeamDTO {
     @Id
     private long id;
-    private LinkedList<Pokemon> teamMembers;
+    private List<Pokemon> teamMembers;
     private Long battleId;
 }

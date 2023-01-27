@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "pokemon")
 @RequiredArgsConstructor
@@ -25,7 +23,6 @@ public class PokemonController {
 
     @GetMapping
     public Page<PokemonDTO> getPokemons(Pageable pageable) {
-        System.out.println(pageable);
         return pokemonService.getPokemons(pageable);
     }
 

@@ -23,7 +23,7 @@ public class TeamService {
     Random random = new Random();
 
     public TeamDTO getById(long id) {
-        Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
+        Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found!"));
         return TeamMapper.toDto(team);
     }
 
@@ -44,5 +44,18 @@ public class TeamService {
     public TeamDTO createTeam(TeamDTO teamDTO) {
         Team savedTeam = teamRepository.save(toEntity(teamDTO));
         return TeamMapper.toDto(savedTeam);
+    }
+
+    public TeamDTO updateTeamById(Long id, TeamDTO teamDTO) {
+        Team teamToUpdate = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found!"));
+        teamToUpdate.setTeamMembers(teamDTO.getTeamMembers());
+        teamToUpdate.setBattleId(teamDTO.getBattleId());
+        Team teamUpdated = teamRepository.save(teamToUpdate);
+        return TeamMapper.toDto(teamUpdated);
+    }
+
+    public void deleteById(Long id) {
+        getById(id);
+        teamRepository.deleteById(id);
     }
 }

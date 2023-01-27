@@ -1,7 +1,9 @@
 package com.manager.cfa_jan2023.controller;
 
 
+import com.manager.cfa_jan2023.service.BattleService;
 import com.manager.cfa_jan2023.service.TeamService;
+import com.manager.cfa_jan2023.service.dto.BattleDTO;
 import com.manager.cfa_jan2023.service.dto.TeamDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,42 +12,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "team")
+@RequestMapping(value = "battle")
 @RequiredArgsConstructor
-public class TeamController {
+public class BattleController {
     //aka endpoint
     //communicates to outside world
     //data gets pulled in as DTO and converted into 'regular data'
-    private final TeamService teamService;
+    private final BattleService battleService;
 
     @GetMapping("{id}")
-    public TeamDTO getById(@PathVariable long id) {
-        return teamService.getById(id);
+    public BattleDTO getById(@PathVariable long id) {
+        return battleService.getById(id);
     }
 
     @GetMapping
-    public List<TeamDTO> getAllTeams() {
-        return teamService.getAllTeams();
+    public List<BattleDTO> getAllBattles() {
+        return battleService.getAllBattles();
     }
 
     @PostMapping
-    public TeamDTO createTeam(@RequestBody TeamDTO teamDTO) {
-        return teamService.createTeam(teamDTO);
-    }
-
-    @PostMapping(value = "/random")
-    public TeamDTO createRandomTeam() {
-        return teamService.generateARandomTeam(6);
+    public BattleDTO createBattle(@RequestBody BattleDTO battleDTO) {
+        return battleService.createBattle(battleDTO);
     }
 
     @PutMapping("{id}")
-    public TeamDTO updateTeamById(@PathVariable Long id, @RequestBody TeamDTO teamDTO) {
-        return teamService.updateTeamById(id, teamDTO);
+    public BattleDTO updateBattleById(@PathVariable Long id, @RequestBody BattleDTO battleDTO) {
+        return battleService.updateBattleById(id, battleDTO);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        teamService.deleteById(id);
+        battleService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 

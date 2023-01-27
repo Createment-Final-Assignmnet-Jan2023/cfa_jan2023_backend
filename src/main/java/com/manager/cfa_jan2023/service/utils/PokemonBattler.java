@@ -1,7 +1,6 @@
 package com.manager.cfa_jan2023.service.utils;
 
 import com.manager.cfa_jan2023.repository.model.Pokemon;
-import com.manager.cfa_jan2023.repository.model.Team;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

@@ -13,9 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamDTO {
+public class BattleDTO {
     @Id
     private long id;
-    private List<Pokemon> teamMembers;
-    private Long battleId;
 }

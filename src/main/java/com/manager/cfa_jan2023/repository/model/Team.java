@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Team {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Pokemon> teamMembers;

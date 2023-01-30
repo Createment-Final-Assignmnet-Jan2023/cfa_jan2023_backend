@@ -14,68 +14,6 @@ public class CfaJan2023Application {
     public static void main(String[] args) {
         SpringApplication.run(CfaJan2023Application.class, args);
 
-//        Battler battler = new Battler();
-//        Team teamA = new Team(
-//                new LinkedList<>(
-//                        List.of(
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                )
-//                                )
-//                )
-//        );
-//        Team teamB = new Team(
-//                new LinkedList<>(
-//                        List.of(
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                ),
-//                                new Pokemon(
-//                                        "Pikachu",
-//                                        List.of("Electric")
-//                                )
-//                        )
-//                )
-//        );
-//        battler.teamBattle(teamA, teamB);
     }
 
 }

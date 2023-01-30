@@ -49,7 +49,7 @@ public class TeamService {
     public TeamDTO updateTeamById(Long id, TeamDTO teamDTO) {
         Team teamToUpdate = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found!"));
         teamToUpdate.setTeamMembers(teamDTO.getTeamMembers());
-        teamToUpdate.setBattleId(teamDTO.getBattleId());
+        teamToUpdate.setBattle(teamDTO.getBattle());
         Team teamUpdated = teamRepository.save(teamToUpdate);
         return TeamMapper.toDto(teamUpdated);
     }

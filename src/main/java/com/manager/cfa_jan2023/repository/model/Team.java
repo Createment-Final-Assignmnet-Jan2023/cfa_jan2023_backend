@@ -22,7 +22,12 @@ public class Team {
             foreignKey = @ForeignKey(name ="fk_team"),
             inverseForeignKey = @ForeignKey(name = "fk_pokemon"))
     private List<Pokemon> teamMembers;
-    private Long battleId;
+    @ManyToOne
+    @JoinColumn(
+            name="battle",
+            foreignKey = @ForeignKey(name ="fk_battle"),
+            nullable=false)
+    private Battle battle;
 
     public Team(List<Pokemon> teamMembers) {
         this.teamMembers = teamMembers;

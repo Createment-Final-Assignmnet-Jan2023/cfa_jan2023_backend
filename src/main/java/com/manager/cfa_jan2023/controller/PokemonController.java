@@ -1,15 +1,11 @@
 package com.manager.cfa_jan2023.controller;
 
 import com.manager.cfa_jan2023.service.PokemonService;
-import com.manager.cfa_jan2023.repository.model.Pokemon;
 import com.manager.cfa_jan2023.service.dto.PokemonDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "pokemon")
@@ -26,7 +22,8 @@ public class PokemonController {
     }
 
     @GetMapping
-    public List<PokemonDTO> getAllPokemons() {
-        return pokemonService.getAllPokemons();
+    public Page<PokemonDTO> getPokemons(Pageable pageable) {
+        return pokemonService.getPokemons(pageable);
     }
+
 }

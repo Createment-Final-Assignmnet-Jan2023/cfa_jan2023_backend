@@ -3,6 +3,8 @@ package com.manager.cfa_jan2023.service.mapper;
 import com.manager.cfa_jan2023.repository.model.Pokemon;
 import com.manager.cfa_jan2023.service.dto.PokemonDTO;
 
+import java.util.List;
+
 public class PokemonMapper {
     public static PokemonDTO toDto(Pokemon entity) {
         return PokemonDTO.builder()
@@ -20,21 +22,27 @@ public class PokemonMapper {
                 .baseSpeed(entity.getBaseSpeed())
                 .build();
     }
+    public static List<PokemonDTO> toDto(List<Pokemon> entities) {
+        return entities.stream().map(PokemonMapper::toDto).toList();
+    }
 
-    public static Pokemon toEntity(PokemonDTO userDTO) {
+    public static Pokemon toEntity(PokemonDTO pokemonDTO) {
         return Pokemon.builder()
-                .id(userDTO.getId())
-                .name(userDTO.getName())
-                .types(userDTO.getTypes())
-                .imageFront(userDTO.getImageFront())
-                .imageBack(userDTO.getImageBack())
-                .imageArt(userDTO.getImageArt())
-                .baseHealthPoints(userDTO.getBaseHealthPoints())
-                .baseNormalAttack(userDTO.getBaseNormalAttack())
-                .baseNormalDefense(userDTO.getBaseNormalDefense())
-                .baseSpecialAttack(userDTO.getBaseSpecialAttack())
-                .baseSpecialDefense(userDTO.getBaseSpecialDefense())
-                .baseSpeed(userDTO.getBaseSpeed())
+                .id(pokemonDTO.getId())
+                .name(pokemonDTO.getName())
+                .types(pokemonDTO.getTypes())
+                .imageFront(pokemonDTO.getImageFront())
+                .imageBack(pokemonDTO.getImageBack())
+                .imageArt(pokemonDTO.getImageArt())
+                .baseHealthPoints(pokemonDTO.getBaseHealthPoints())
+                .baseNormalAttack(pokemonDTO.getBaseNormalAttack())
+                .baseNormalDefense(pokemonDTO.getBaseNormalDefense())
+                .baseSpecialAttack(pokemonDTO.getBaseSpecialAttack())
+                .baseSpecialDefense(pokemonDTO.getBaseSpecialDefense())
+                .baseSpeed(pokemonDTO.getBaseSpeed())
                 .build();
+    }
+    public static List<Pokemon> toEntity(List<PokemonDTO> pokemonDTOs) {
+        return pokemonDTOs.stream().map(PokemonMapper::toEntity).toList();
     }
 }

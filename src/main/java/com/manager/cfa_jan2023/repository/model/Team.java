@@ -19,15 +19,9 @@ public class Team {
     @JoinTable(name = "pokemons_teams",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "pokemon_id"),
-            foreignKey = @ForeignKey(name ="fk_team"),
+            foreignKey = @ForeignKey(name = "fk_team"),
             inverseForeignKey = @ForeignKey(name = "fk_pokemon"))
     private List<Pokemon> teamMembers;
-    @ManyToOne
-    @JoinColumn(
-            name="battle",
-            foreignKey = @ForeignKey(name ="fk_battle"),
-            nullable=false)
-    private Battle battle;
 
     public Team(List<Pokemon> teamMembers) {
         this.teamMembers = teamMembers;

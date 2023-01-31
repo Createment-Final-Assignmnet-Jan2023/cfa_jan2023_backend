@@ -30,5 +30,4 @@ public class PokemonService {
                 .toList();
         return new PageImpl<>(pokemonList, pageable, pokemonList.size());
     }
-
 }

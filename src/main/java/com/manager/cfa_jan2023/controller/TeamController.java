@@ -1,6 +1,5 @@
 package com.manager.cfa_jan2023.controller;
 
-
 import com.manager.cfa_jan2023.service.TeamService;
 import com.manager.cfa_jan2023.service.dto.TeamDTO;
 import lombok.RequiredArgsConstructor;
@@ -38,15 +37,9 @@ public class TeamController {
         return teamService.generateARandomTeam(6);
     }
 
-    @PutMapping("{id}")
-    public TeamDTO updateTeamById(@PathVariable Long id, @RequestBody TeamDTO teamDTO) {
-        return teamService.updateTeamById(id, teamDTO);
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         teamService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 }

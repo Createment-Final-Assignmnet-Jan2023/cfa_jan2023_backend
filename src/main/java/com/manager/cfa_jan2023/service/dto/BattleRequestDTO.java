@@ -9,10 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BattleDTO {
-
-    private long id;
-    private TeamDTO teamA;
-    private TeamDTO teamB;
-    private boolean youWon;
+public class BattleRequestDTO {
+    private Long teamA;
 }

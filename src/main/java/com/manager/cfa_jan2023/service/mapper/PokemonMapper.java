@@ -3,6 +3,8 @@ package com.manager.cfa_jan2023.service.mapper;
 import com.manager.cfa_jan2023.repository.model.Pokemon;
 import com.manager.cfa_jan2023.service.dto.PokemonDTO;
 
+import java.util.List;
+
 public class PokemonMapper {
     public static PokemonDTO toDto(Pokemon entity) {
         return PokemonDTO.builder()
@@ -20,6 +22,9 @@ public class PokemonMapper {
                 .baseSpeed(entity.getBaseSpeed())
                 .build();
     }
+    public static List<PokemonDTO> toDto(List<Pokemon> entities) {
+        return entities.stream().map(PokemonMapper::toDto).toList();
+    }
 
     public static Pokemon toEntity(PokemonDTO pokemonDTO) {
         return Pokemon.builder()
@@ -36,5 +41,8 @@ public class PokemonMapper {
                 .baseSpecialDefense(pokemonDTO.getBaseSpecialDefense())
                 .baseSpeed(pokemonDTO.getBaseSpeed())
                 .build();
+    }
+    public static List<Pokemon> toEntity(List<PokemonDTO> pokemonDTOs) {
+        return pokemonDTOs.stream().map(PokemonMapper::toEntity).toList();
     }
 }

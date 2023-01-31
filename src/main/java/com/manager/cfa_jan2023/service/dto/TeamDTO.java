@@ -1,8 +1,5 @@
 package com.manager.cfa_jan2023.service.dto;
 
-import com.manager.cfa_jan2023.repository.model.Battle;
-import com.manager.cfa_jan2023.repository.model.Pokemon;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamDTO {
-    @Id
+
     private long id;
-    private List<Pokemon> teamMembers;
-    private Battle battle;
+    private List<PokemonDTO> teamMembers;
 }

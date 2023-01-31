@@ -2,9 +2,8 @@ package com.manager.cfa_jan2023.controller;
 
 
 import com.manager.cfa_jan2023.service.BattleService;
-import com.manager.cfa_jan2023.service.TeamService;
 import com.manager.cfa_jan2023.service.dto.BattleDTO;
-import com.manager.cfa_jan2023.service.dto.TeamDTO;
+import com.manager.cfa_jan2023.service.dto.BattleRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +30,8 @@ public class BattleController {
     }
 
     @PostMapping
-    public BattleDTO createBattle(@RequestBody BattleDTO battleDTO) {
-        return battleService.createBattle(battleDTO);
-    }
-
-    @PutMapping("{id}")
-    public BattleDTO updateBattleById(@PathVariable Long id, @RequestBody BattleDTO battleDTO) {
-        return battleService.updateBattleById(id, battleDTO);
+    public BattleDTO createBattle(@RequestBody BattleRequestDTO battleRequestDTO) {
+        return battleService.createBattle(battleRequestDTO.getTeamA());
     }
 
     @DeleteMapping("{id}")

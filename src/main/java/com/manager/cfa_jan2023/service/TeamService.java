@@ -3,6 +3,7 @@ package com.manager.cfa_jan2023.service;
 import com.manager.cfa_jan2023.controller.error.NotFoundException;
 import com.manager.cfa_jan2023.repository.PokemonRepository;
 import com.manager.cfa_jan2023.repository.TeamRepository;
+import com.manager.cfa_jan2023.repository.model.Pokemon;
 import com.manager.cfa_jan2023.repository.model.Team;
 import com.manager.cfa_jan2023.service.dto.TeamDTO;
 import com.manager.cfa_jan2023.service.mapper.TeamMapper;
@@ -33,25 +34,18 @@ public class TeamService {
                 .toList();
     }
 
-        public TeamDTO generateARandomTeam(int teamSize) {
+    public TeamDTO generateARandomTeam(int teamSize) {
         Team team = new Team();
-            for (int i = 0; i < teamSize; i++) {
-            pokemonRepository.findById((long) (random.nextInt(151) + 1)).ifPresent(team::addMember);
+        for (int i = 0; i < teamSize; i++) {
+            Pokemon pokemon = pokemonRepository.getById((long) (random.nextInt(151) + 1));
+            team.addMember(pokemon);
         }
-
-        return createTeam(TeamMapper.toDto(team));
+        return TeamMapper.toDto(teamRepository.save(team));
     }
+
     public TeamDTO createTeam(TeamDTO teamDTO) {
         Team savedTeam = teamRepository.save(toEntity(teamDTO));
         return TeamMapper.toDto(savedTeam);
-    }
-
-    public TeamDTO updateTeamById(Long id, TeamDTO teamDTO) {
-        Team teamToUpdate = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found!"));
-        teamToUpdate.setTeamMembers(teamDTO.getTeamMembers());
-        teamToUpdate.setBattle(teamDTO.getBattle());
-        Team teamUpdated = teamRepository.save(teamToUpdate);
-        return TeamMapper.toDto(teamUpdated);
     }
 
     public void deleteById(Long id) {

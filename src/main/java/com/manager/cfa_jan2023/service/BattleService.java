@@ -4,6 +4,7 @@ import com.manager.cfa_jan2023.controller.error.NotFoundException;
 import com.manager.cfa_jan2023.repository.BattleRepository;
 import com.manager.cfa_jan2023.repository.model.Battle;
 import com.manager.cfa_jan2023.service.dto.BattleDTO;
+import com.manager.cfa_jan2023.service.dto.TeamDTO;
 import com.manager.cfa_jan2023.service.mapper.BattleMapper;
 import com.manager.cfa_jan2023.service.utils.PokemonBattler;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import static com.manager.cfa_jan2023.service.mapper.BattleMapper.toEntity;
 public class BattleService {
     //business logic happens here
     private final BattleRepository battleRepository;
+    private final TeamService teamService;
     private final PokemonBattler pokemonBattler = new PokemonBattler();
 
     public BattleDTO getById(long id) {
@@ -31,17 +33,20 @@ public class BattleService {
                 .toList();
     }
 
-    public BattleDTO createBattle(BattleDTO battleDTO) {
+    public BattleDTO createBattle(TeamDTO teamA) {
+        TeamDTO teamB = teamService.generateARandomTeam(teamA.getTeamMembers().size());
+        BattleDTO battleDTO = BattleDTO.builder()
+                .teamA(teamA)
+                .teamB(teamB)
+                .youWon(this.pokemonBattler.isTeamAVictorious(teamA, teamB))
+                .build();
         Battle savedBattle = battleRepository.save(toEntity(battleDTO));
         return BattleMapper.toDto(savedBattle);
     }
 
-    public BattleDTO updateBattleById(Long id, BattleDTO battleDTO) {
-        Battle battleToUpdate = battleRepository.findById(id).orElseThrow(() -> new NotFoundException("Battle not found!"));
-//        battleToUpdate.setTeamMembers(teamDTO.getTeamMembers());
-//        battleToUpdate.setBattleId(teamDTO.getBattleId());
-        Battle battleUpdated = battleRepository.save(battleToUpdate);
-        return BattleMapper.toDto(battleUpdated);
+    public BattleDTO createBattle(Long teamId) {
+        TeamDTO teamDTO = teamService.getById(teamId);
+        return createBattle(teamDTO);
     }
 
     public void deleteById(Long id) {

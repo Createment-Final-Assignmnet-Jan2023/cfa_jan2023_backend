@@ -1,6 +1,7 @@
 package com.manager.cfa_jan2023.service.utils;
 
-import com.manager.cfa_jan2023.repository.model.Pokemon;
+import com.manager.cfa_jan2023.service.dto.PokemonDTO;
+import com.manager.cfa_jan2023.service.dto.TeamDTO;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
 
 @Data
 @RequiredArgsConstructor
@@ -32,41 +32,27 @@ public class PokemonBattler {
     };
     Random random = new Random();
 
+    public boolean isTeamAVictorious(TeamDTO teamA, TeamDTO teamB) {
+        int livesA = teamA.getTeamMembers().size();
+        int livesB = teamB.getTeamMembers().size();
+        while (livesA > 0 && livesB > 0) {
+            PokemonDTO combatantA = teamA.getTeamMembers().get(livesA - 1);
+            PokemonDTO combatantB = teamB.getTeamMembers().get(livesB - 1);
+            PokemonDTO loser = battle(combatantA, combatantB);
+            if (loser == combatantA) {
+                livesA--;
+            } else {
+                livesB--;
+            }
+        }
+        return livesB==0;
+    }
 
-//    public Team teamBattle(Team teamA, Team teamB) {
-//        List<Pokemon> battleTeamA = teamA.getTeamMembers();
-//        List<Pokemon> battleTeamB = teamB.getTeamMembers();
-//        int counter = 1;
-//        while (!battleTeamA.isEmpty() && !battleTeamB.isEmpty()) {
-//            System.out.println("A - round "+ counter + " - size "+battleTeamA.size());
-//            System.out.println("B - round "+ counter + " - size "+battleTeamB.size());
-//            Pokemon combatantA = battleTeamA.get(0);
-//            Pokemon combatantB = battleTeamB.get(0);
-//            Pokemon loser = battle(combatantA, combatantB);
-//            if (loser == combatantA) {
-//                battleTeamA.remove(combatantA);
-//            } else if (loser == combatantB) {
-//                battleTeamB.remove(combatantB);
-//            }
-//            counter++;
-//        }
-//        if (battleTeamA.isEmpty()) {
-//            System.out.println("blah blah");
-//            return teamB;
-//        }
-//        if (battleTeamB.isEmpty()) {
-//            System.out.println("toet toet");
-//            return teamA;
-//
-//        }
-//        return null;
-//    }
-
-    public Pokemon battle(Pokemon combatantA, Pokemon combatantB) {
+    private PokemonDTO battle(PokemonDTO combatantA, PokemonDTO combatantB) {
         double combatScoreA = getAttackScore(combatantA.getTypes(), combatantB.getTypes());
         double combatScoreB = getAttackScore(combatantB.getTypes(), combatantA.getTypes());
         if (combatScoreA == combatScoreB) {
-            return (Pokemon) flipACoin(combatantA, combatantB);
+            return flipACoin(combatantA, combatantB);
         } else if (combatScoreA < combatScoreB) {
             return combatantA;
         } else {
@@ -74,7 +60,7 @@ public class PokemonBattler {
         }
     }
 
-    Object flipACoin(Object a, Object b) {
+    PokemonDTO flipACoin(PokemonDTO a, PokemonDTO b) {
         return switch (random.nextInt(2)) {
             case 0 -> a;
             case 1 -> b;
@@ -82,20 +68,22 @@ public class PokemonBattler {
         };
     }
 
-    public double getAttackScore(List<String> attackerType, List<String> defenderType) {
+    double getAttackScore(List<String> attackerType, List<String> defenderType) {
         List<Double> combatScoresB = new ArrayList<>();
-        defenderType.forEach(type -> combatScoresB.add(POKEMON_TYPE_CHART[convertTypeToInt(attackerType.get(0))][convertTypeToInt(type)]));
+        defenderType.forEach(type -> combatScoresB.add(
+                POKEMON_TYPE_CHART[convertTypeToInt(attackerType.get(0))][convertTypeToInt(type)]));
         return Collections.min(combatScoresB);
-
     }
 
     int convertTypeToInt(String type) {
         List<PokemonTypes> pokemonTypesList = List.of(PokemonTypes.values());
         for (int i = 0; i < pokemonTypesList.size(); i++) {
             if (pokemonTypesList.get(i).toString().equalsIgnoreCase(type)) {
+                System.out.println(type + " equals index " +pokemonTypesList.get(i).toString());
                 return i;
             }
         }
+        System.out.println(type);
         return -1;
     }
 }
